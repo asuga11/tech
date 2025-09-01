@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Бүтээгдэхүүний жагсаалт</title>
+    <script>
+        async function fetchProducts() {
+            const response = await fetch("http://localhost:8080/api/products");
+            const products = await response.json();
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = "";
+            products.forEach(p => {
+                productList.innerHTML += `
+          <div style="border:1px solid #ddd;padding:10px;margin:10px;">
+            <img src="${p.imageUrl}" alt="${p.name}" style="max-width:100px;" />
+            <h3>${p.name}</h3>
+            <p>Үнэ: ${p.price}₮</p>
+            <p>${p.description}</p>
+            <p>Ангилал: ${p.category}</p>
+            <p>Нөөц: ${p.stock}</p>
+            <button onclick="deleteProduct(${p.id})">Устгах</button>
+          </div>
+        `;
+            });
+        }
+
+        async function deleteProduct(id) {
+            await fetch(`http://localhost:8080/api/products/${id}`, { method: "DELETE" });
+            fetchProducts();
+        }
+
+        async function addProduct(event) {
+            event.preventDefault();
+            const product = {
+                name: document.getElementById("name").value,
+                price: parseFloat(document.getElementById("price").value),
+                imageUrl: document.getElementById("imageUrl").value,
+                description: document.getElementById("description").value,
+                category: document.getElementById("category").value,
+                stock: parseInt(document.getElementById("stock").value),
+            };
+            await fetch("http://localhost:8080/api/products", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(product),
+            });
+            document.getElementById("product-form").reset();
+            fetchProducts();
+        }
+
+        window.onload = fetchProducts;
+    </script>
+</head>
+<body>
+<h1>Бүтээгдэхүүний жагсаалт</h1>
+<form id="product-form" onsubmit="addProduct(event)">
+    <input type="text" id="name" placeholder="Нэр" required />
+    <input type="number" id="price" placeholder="Үнэ" required />
+    <input type="text" id="imageUrl" placeholder="Зураг URL" />
+    <input type="text" id="description" placeholder="Тайлбар" />
+    <input type="text" id="category" placeholder="Ангилал" />
+    <input type="number" id="stock" placeholder="Нөөц" />
+    <button type="submit">Нэмэх</button>
+</form>
+
+<div id="product-list"></div>
+</body>
+</html>

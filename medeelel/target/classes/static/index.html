@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Харилцагчийн жагсаалт</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+<div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4">Харилцагчийн жагсаалт</h1>
+
+    <!-- Харилцагч нэмэх хэсэг -->
+    <form id="addCustomerForm" class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" placeholder="Нэр" name="name" required class="border p-2 rounded" />
+        <input type="email" placeholder="Имэйл" name="email" required class="border p-2 rounded" />
+        <input type="text" placeholder="Утас" name="phone" required class="border p-2 rounded" />
+        <input type="text" placeholder="Хаяг" name="address" required class="border p-2 rounded" />
+        <button type="submit" class="col-span-1 md:col-span-2 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Нэмэх</button>
+    </form>
+
+    <!-- Имэйлээр хайх хэсэг -->
+    <form id="searchForm" class="mb-4 flex gap-2">
+        <input type="email" id="searchEmail" placeholder="Имэйлээр хайх" class="border p-2 rounded flex-grow" />
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Хайх</button>
+    </form>
+
+    <div id="customerList" class="space-y-4"></div>
+</div>
+
+<script>
+    const API_URL = 'http://localhost:8081/api/customers';
+
+    async function fetchCustomers() {
+        const res = await fetch(API_URL);
+        const customers = await res.json();
+        renderCustomers(customers);
+    }
+
+    function renderCustomers(customers) {
+        const list = document.getElementById('customerList');
+        list.innerHTML = '';
+        customers.forEach(c => {
+            list.innerHTML += `
+          <div class="p-4 bg-gray-50 border rounded shadow-sm">
+            <p><strong>Нэр:</strong> ${c.name}</p>
+            <p><strong>Имэйл:</strong> ${c.email}</p>
+            <p><strong>Утас:</strong> ${c.phone}</p>
+            <p><strong>Хаяг:</strong> ${c.address}</p>
+            <button onclick="deleteCustomer(${c.id})" class="mt-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">Устгах</button>
+          </div>
+        `;
+        });
+    }
+
+    document.getElementById('addCustomerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+            name: form.name.value,
+            email: form.email.value,
+            phone: form.phone.value,
+            address: form.address.value,
+        };
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        form.reset();
+        fetchCustomers();
+    });
+
+    async function deleteCustomer(id) {
+        await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+        fetchCustomers();
+    }
+
+    document.getElementById('searchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('searchEmail').value;
+        const res = await fetch(`${API_URL}/search?email=${encodeURIComponent(email)}`);
+        if (res.ok) {
+            const customer = await res.json();
+            renderCustomers([customer]);
+        } else {
+            alert("Харилцагч олдсонгүй");
+        }
+    });
+
+    fetchCustomers();
+</script>
+</body>
+</html>
