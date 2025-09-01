@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyTech</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#102E50"  /* Here we changed the color */
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow dark:bg-primary">
+    <div class="max-w-full px-4 py-4 flex justify-between items-center relative">
+      <!-- Logo -->
+      <div class="text-2xl font-bold text-white flex items-center gap-2">
+        <i data-lucide="cpu" class="w-6 h-6"></i>
+        MyTech
+      </div>
+  
+      <!-- Search bar -->
+      <div class="hidden md:block flex-grow mx-8">
+        <input type="text" placeholder="Хайх..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+      </div>
+  
+      <!-- Icons toggle button -->
+      <div class="relative">
+        <button id="icon-toggle-btn" class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+          <img src="image/7168076.png" alt="icon" class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  
+  
+
+  <!-- Hero Banner -->
+  <section class="bg-primary text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-5xl font-extrabold mb-4">Шинэ технологийн бүтээгдэхүүнүүд</h1>
+      <p class="text-xl mb-6">Шинэ компьютер, дагалдах хэрэгсэл, электроникс бүгд энд!</p>
+      <a href="Бүтээгдэхүүн.html" class="bg-white text-primary px-6 py-3 rounded font-semibold hover:bg-gray-100">Бүтээгдэхүүн үзэх</a>
+    </div>
+
+  <!-- Featured Products -->
+  <section class="py-12 bg-primary dark:bg-primary">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-6 text-center text-white">Онцлох бүтээгдэхүүн</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Product Card -->
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="image/laptop.png" alt="Gaming Laptop" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Gaming Laptop</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 3,200,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="iPhone 15" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">iPhone 15</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 5,500,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Wireless Mouse" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Wireless Mouse</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 45,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Dell Monitor" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Dell Monitor</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 870,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Smartwatch" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Smartwatch</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 120,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Bluetooth Speaker" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Bluetooth Speaker</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 15,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="External Hard Drive" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">External Hard Drive</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 250,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Power Bank" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Power Bank</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 30,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Webcam" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Webcam</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 50,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Wireless Keyboard" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Wireless Keyboard</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 45,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Gaming Headset" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Gaming Headset</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 80,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+        <div class="bg-white rounded-2xl shadow p-4 dark:bg-gray-700">
+          <img src="https://via.placeholder.com/300x200" alt="Digital Camera" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg text-primary">Digital Camera</h3>
+          <p class="text-gray-600 dark:text-gray-300">₮ 500,000</p>
+          <button class="mt-2 bg-primary text-white px-4 py-2 rounded hover:opacity-90 w-full">Сагсанд нэмэх</button>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  </section>
+
+<!-- Category Section -->
+<section class="py-12 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-2xl font-bold mb-6 text-center text-primary">Бүтээгдэхүүний ангилал</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      
+      <!-- Лаптоп -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="image/images.jpg" alt="Лаптоп" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Лаптоп</p>
+      </div>
+
+      <!-- Гар утас -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Phone" alt="Гар утас" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Гар утас</p>
+      </div>
+
+      <!-- Дагалдах хэрэгсэл -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Accessory" alt="Дагалдах хэрэгсэл" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Дагалдах хэрэгсэл</p>
+      </div>
+
+      <!-- Монитор -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Monitor" alt="Монитор" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Монитор</p>
+      </div>
+
+      <!-- Таблет -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Tablet" alt="Таблет" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Таблет</p>
+      </div>
+
+      <!-- Чихэвч -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Headphones" alt="Чихэвч" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Чихэвч</p>
+      </div>
+
+      <!-- Бусад -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Other" alt="Бусад" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Бусад</p>
+      </div>
+
+      <!-- Веб Камера -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Webcam" alt="Веб Камера" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Веб Камера</p>
+      </div>
+
+      <!-- Bluetooth Speaker -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Bluetooth+Speaker" alt="Bluetooth Speaker" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Bluetooth Speaker</p>
+      </div>
+
+      <!-- Power Bank -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Power+Bank" alt="Power Bank" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Power Bank</p>
+      </div>
+
+      <!-- Smartwatch -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=Smartwatch" alt="Smartwatch" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">Smartwatch</p>
+      </div>
+
+      <!-- External Hard Drive -->
+      <div class="bg-white p-6 text-center rounded-2xl shadow hover:shadow-xl transition hover:scale-105 duration-300 border-t-4 border-primary hover:bg-primary group">
+        <img src="https://via.placeholder.com/100?text=External+Hard+Drive" alt="External Hard Drive" class="mx-auto mb-3 w-20 h-20 object-contain group-hover:grayscale-0 group-hover:brightness-110">
+        <p class="font-semibold text-primary group-hover:text-white text-lg">External Hard Drive</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  
+  
+
+  <!-- Footer -->
+  <footer class="bg-[#102E50] text-white py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+      
+      <!-- Зүүн тал -->
+      <div class="text-center md:text-left">
+        <p class="text-sm">&copy; 2025 <span class="font-semibold text-white">MyTech</span>. Бүх эрх хуулиар хамгаалагдсан.</p>
+      </div>
+  
+      <!-- Баруун тал -->
+      <div class="flex space-x-6">
+        <a href="#" class="text-sm hover:text-indigo-300 transition-colors duration-200">Нууцлалын бодлого</a>
+        <a href="#" class="text-sm hover:text-indigo-300 transition-colors duration-200">Үйлчилгээний нөхцөл</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

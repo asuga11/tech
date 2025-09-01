@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сагсанд байгаа бүтээгдэхүүн</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#102E50"  /* Here we changed the color */
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow dark:bg-primary">
+    <div class="max-w-full px-4 py-4 bg-white flex justify-between items-center">
+      <div class="text-2xl font-bold text-primary">MyTech</div>
+      <nav class="space-x-6">
+        <a href="index.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Go to Home">Нүүр</a>
+        <a href="Бүтээгдэхүүн.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="View Products">Бүтээгдэхүүн</a>
+        <a href="Хямдрал.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Check Discounts">Хямдрал</a>
+        <a href="Холбоо барих.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Contact Us">Холбоо барих</a>
+        <a href="Нэвтрэх.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Login">Нэвтрэх</a>
+        <a href="Сагсанд байгаа бүтээгдэхүүн.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Login">Сагс</a>
+        
+      </nav>
+    </div>
+  </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto p-6">
+        <h1 class="text-3xl font-semibold text-[#102E50] dark:text-gray-100 text-center mb-6">Сагсанд байгаа бүтээгдэхүүн</h1>
+
+        <section class="bg-white dark:bg-[#102E50] rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-[#102E50] dark:text-gray-100 mb-4">Таны сагс</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b text-left text-[#102E50] dark:text-gray-100">Бүтээгдэхүүн</th>
+                            <th class="py-2 px-4 border-b text-left text-[#102E50] dark:text-gray-100">Үнэ</th>
+                            <th class="py-2 px-4 border-b text-left text-[#102E50] dark:text-gray-100">Тоон</th>
+                            <th class="py-2 px-4 border-b text-left text-[#102E50] dark:text-gray-100">Нийт</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example product entry -->
+                        <tr>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">Бүтээгдэхүүн 1</td>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">₮ 1000</td>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">1</td>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">₮ 1000</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">Бүтээгдэхүүн 2</td>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">₮ 2000</td>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">2</td>
+                            <td class="py-2 px-4 border-b text-gray-700 dark:text-gray-100">₮ 4000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Total Amount and Checkout Button -->
+            <div class="mt-6 flex justify-between items-center">
+                <span class="font-semibold text-xl text-[#102E50] dark:text-gray-100">Нийт дүн: ₮ 5000</span>
+                <button class="px-6 py-2 bg-[#102E50] text-white rounded-md hover:bg-blue-600 transition-colors">
+                    Төлбөр хийх
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-white py-6 border-t mt-12 dark:bg-primary dark:text-gray-300">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between text-gray-500 dark:text-gray-300">
+        <p>&copy; 2025 MyTech. Бүх эрх хуулиар хамгаалагдсан.</p>
+        <div class="space-x-4 mt-2 md:mt-0">
+          <a href="#" class="hover:text-primary">Нууцлалын бодлого</a>
+          <a href="#" class="hover:text-primary">Үйлчилгээний нөхцөл</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

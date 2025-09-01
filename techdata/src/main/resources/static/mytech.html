@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Нүүр хуудас</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#102E50",
+          },
+        },
+      },
+    };
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .active-item {
+      background-color: #102E50;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="flex h-screen bg-gray-100">
+  <!-- Sidebar (from side bar.html) -->
+  <aside id="sidebar" class="bg-gray-700 text-white flex flex-col justify-between transition-all duration-300 w-20 h-screen fixed left-0 top-0">
+    <div>
+      <!-- Toggle Button -->
+      <div class="flex justify-end p-4">
+        <button onclick="toggleSidebar()" class="text-white focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <!-- Logo -->
+      <div class="flex items-center justify-center py-4">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 0L0 6v8l10 6 10-6V6L10 0z" />
+        </svg>
+      </div>
+      <!-- Navigation -->
+      <nav class="flex flex-col items-center space-y-2 mt-8" id="menuItems">
+        <!-- JS will insert menu items here -->
+      </nav>
+      <!-- Teams -->
+      <ul class="mt-8 space-y-1 px-2" id="teams">
+        <!-- JS will insert teams here -->
+      </ul>
+    </div>
+    <!-- User -->
+    <div class="px-4 pb-4 flex items-center gap-3">
+      <img src="image/gaya_sda.jpg" alt="User" class="w-10 h-10 rounded-full" />
+      <div class="sidebar-label hidden">
+        <p class="text-sm font-medium">gantsogt</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col min-h-screen ml-20 transition-all duration-300" id="mainContent">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+          <a href="#" class="text-xl font-bold text-primary">Tech Store</a>
+        </div>
+        <div class="relative w-full max-w-md">
+          <input id="search-input" type="text" placeholder="Хайх..." class="w-full py-2 pl-4 pr-10 border border-gray-300 rounded" />
+          <button id="search-btn" class="absolute right-2 top-2 text-gray-500">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+        <nav class="space-x-4">
+          <a href="#" class="text-gray-600 hover:text-primary">Нүүр</a>
+          <a href="#" class="text-gray-600 hover:text-primary">Холбоо барих</a>
+          <a href="#" class="text-gray-600 hover:text-primary">Нэвтрэх</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="bg-primary text-white py-16">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-extrabold mb-4">Шинэ технологийн бүтээгдэхүүнүүд</h1>
+        <p class="text-xl mb-6">Шинэ компьютер, дагалдах хэрэгсэл, электроникс бүгд энд!</p>
+        <a href="Бүтээгдэхүүн.html"
+          class="bg-white text-primary px-6 py-3 rounded font-semibold hover:bg-primary-hover">Бүтээгдэхүүн үзэх</a>
+      </div>
+    </section>
+
+    <!-- Бүтээгдэхүүнүүд -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-center">Шилдэг бүтээгдэхүүнүүд</h2>
+        <div id="products-container"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Бүтээгдэхүүнүүд энд дүүрнэ -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-6 mt-16">
+      <div class="max-w-7xl mx-auto px-4 text-center text-gray-600">&copy; 2025 Tech Store. Бүх эрх хуулиар хамгаалагдсан.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Sidebar menu and teams
+    const menuItems = [
+      { icon: 'fa-home', label: 'Нүүр хуудас', href: 'mytech.html' },
+      { icon: 'fa-box', label: 'Бүтээгдэхүүн', href: 'Бүтээгдэхүүн.html' },
+      { icon: 'fa-tags', label: 'Хямдрал', href: 'Хямдрал.html' },
+      { icon: 'fa-envelope', label: 'Холбоо барих', href: 'Холбоо барих.html' },
+      { icon: 'fa-sign-in-alt', label: 'Нэвтрэх', href: 'Нэвтрэх.html' },
+      { icon: 'fa-shopping-cart', label: 'Сагс', href: 'Сагсанд байгаа бүтээгдэхүүн.html' }
+    ];
+   
+    const menuEl = document.getElementById('menuItems');
+    const teamEl = document.getElementById('teams');
+    const sidebar = document.getElementById('sidebar');
+
+    function renderSidebar() {
+      menuItems.forEach((item) => {
+        const link = document.createElement('a');
+        link.href = item.href;
+        // Sidebar нээгдэхэд: icon зүүнд, текст баруунд зэрэгцэнэ. Хаалттай үед зөвхөн icon төвд.
+        link.className = "group flex items-center w-full px-3 py-2 rounded-md hover:bg-primary cursor-pointer text-sm transition-all duration-300";
+        link.innerHTML = `
+          <i class="fas ${item.icon} text-base"></i>
+          <span class="sidebar-label hidden ml-3 whitespace-nowrap">${item.label}</span>
+        `;
+        if (window.location.pathname.includes(item.href)) {
+          link.classList.add('active-item');
+        }
+        menuEl.appendChild(link);
+      });
+
+      teams.forEach(team => {
+        const li = document.createElement('li');
+        const initial = team[0];
+        li.innerHTML = `
+          <a href="#" class="flex items-center gap-3 px-3 py-2 hover:bg-primary rounded-md text-sm">
+            <span class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">${initial}</span>
+            <span class="sidebar-label hidden ml-3 whitespace-nowrap">${team}</span>
+          </a>
+        `;
+        teamEl.appendChild(li);
+      });
+    }
+
+    function toggleSidebar() {
+      sidebar.classList.toggle('w-72');
+      sidebar.classList.toggle('w-20');
+      document.querySelectorAll('.sidebar-label').forEach(el => {
+        el.classList.toggle('hidden');
+      });
+      // Main content margin left тохируулна
+      const mainContent = document.getElementById('mainContent');
+      if (sidebar.classList.contains('w-72')) {
+        mainContent.classList.remove('ml-20');
+        mainContent.classList.add('ml-72');
+      } else {
+        mainContent.classList.remove('ml-72');
+        mainContent.classList.add('ml-20');
+      }
+    }
+
+    renderSidebar();
+
+    // Product fetch logic (from old mytech.html)
+    const productsContainer = document.getElementById("products-container");
+    const API_URL = "http://localhost:8080/api/products";
+    async function fetchProducts(query = "") {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("API-аас бүтээгдэхүүн авахад алдаа гарлаа");
+        let products = await response.json();
+        if (query) {
+          const qLower = query.toLowerCase();
+          products = products.filter(p =>
+            p.name.toLowerCase().includes(qLower) ||
+            (p.category && p.category.toLowerCase().includes(qLower))
+          );
+        }
+        productsContainer.innerHTML = "";
+        products.forEach(product => {
+          const card = document.createElement("div");
+          card.className = "bg-white rounded-lg shadow-md p-4 flex flex-col";
+          const img = document.createElement("img");
+          img.src = product.imageUrl || "product-default.jpg";
+          img.alt = product.name;
+          img.className = "w-full h-48 object-cover mb-4 rounded";
+          const title = document.createElement("h3");
+          title.className = "text-lg font-semibold";
+          title.textContent = product.name;
+          const price = document.createElement("p");
+          price.className = "text-gray-600";
+          price.textContent = `₮${product.price.toLocaleString()}`;
+          const addToCartBtn = document.createElement("button");
+          addToCartBtn.className = "mt-2 w-full bg-primary text-white py-2 rounded hover:bg-primary-hover";
+          addToCartBtn.textContent = "Сагсанд нэмэх";
+          addToCartBtn.addEventListener("click", () => {
+            alert(`"${product.name}" бүтээгдэхүүнийг сагсанд нэмлээ.`);
+          });
+          card.appendChild(img);
+          card.appendChild(title);
+          card.appendChild(price);
+          card.appendChild(addToCartBtn);
+          productsContainer.appendChild(card);
+        });
+      } catch (error) {
+        productsContainer.innerHTML = `<p class="text-red-600">Бүтээгдэхүүн авахад алдаа гарлаа: ${error.message}</p>`;
+      }
+    }
+    fetchProducts();
+    const searchBtn = document.getElementById("search-btn");
+    const searchInput = document.getElementById("search-input");
+    searchBtn.addEventListener("click", () => {
+      fetchProducts(searchInput.value.trim());
+    });
+    searchInput.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") {
+        fetchProducts(searchInput.value.trim());
+      }
+    });
+  </script>
+</body>
+
+</html>

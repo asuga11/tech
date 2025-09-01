@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyTech</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#102E50"  /* Here we changed the color */
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow dark:bg-primary">
+    <div class="max-w-full px-4 py-4 bg-white flex justify-between items-center">
+      <div class="text-2xl font-bold text-primary">MyTech</div>
+      <nav class="space-x-6">
+        <a href="index.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Go to Home">Нүүр</a>
+        <a href="Бүтээгдэхүүн.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="View Products">Бүтээгдэхүүн</a>
+        <a href="Хямдрал.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Check Discounts">Хямдрал</a>
+        <a href="Холбоо барих.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Contact Us">Холбоо барих</a>
+        <a href="Нэвтрэх.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Login">Нэвтрэх</a>
+        <a href="Сагсанд байгаа бүтээгдэхүүн.html" class="text-gray-700 hover:text-primary dark:text-primary hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md px-3 py-2 transition-colors" aria-label="Login">Сагс</a>
+        
+      </nav>
+    </div>
+  </header>
+
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-6 text-center">Бүтээгдэхүүнүүд</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl shadow p-4">
+          <img src="image/images.jpg" alt="Product" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg">Gaming Laptop</h3>
+          <p class="text-gray-600">₮3,200,000</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x200" alt="Product" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg">iPhone 15</h3>
+          <p class="text-gray-600">₮5,500,000</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x200" alt="Product" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg">Wireless Mouse</h3>
+          <p class="text-gray-600">₮45,000</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-4">
+          <img src="https://via.placeholder.com/300x200" alt="Product" class="rounded-lg mb-4">
+          <h3 class="font-semibold text-lg">Dell Monitor</h3>
+          <p class="text-gray-600">₮870,000</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-white py-6 border-t mt-12 dark:bg-primary dark:text-gray-300">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between text-gray-500 dark:text-gray-300">
+      <p>&copy; 2025 MyTech. Бүх эрх хуулиар хамгаалагдсан.</p>
+      <div class="space-x-4 mt-2 md:mt-0">
+        <a href="#" class="hover:text-primary">Нууцлалын бодлого</a>
+        <a href="#" class="hover:text-primary">Үйлчилгээний нөхцөл</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

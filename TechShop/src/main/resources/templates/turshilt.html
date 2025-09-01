@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sidebar Toggle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#102E50",
+          },
+        },
+      },
+    };
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    .active-item {
+      background-color: #102E50;
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 transition-all duration-300" id="page-container">
+
+  <!-- Header -->
+  <header id="page-header" class="bg-white shadow dark:bg-primary fixed top-0 left-0 w-full z-30 transition-all duration-300">
+    <div class="max-w-full px-4 py-4 flex justify-between items-center relative">
+      <!-- Logo -->
+      <div class="text-2xl font-bold text-white flex items-center gap-2">
+        <i class="fas fa-microchip w-6 h-6"></i>
+        MyTech
+      </div>
+
+      <!-- Search bar -->
+      <div class="hidden md:block flex-grow mx-8">
+        <input type="text" placeholder="Хайх..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+      </div>
+
+      <!-- Sidebar toggle button -->
+      <div class="relative">
+        <button id="icon-toggle-btn" class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+          <img src="image/7168076.png" alt="icon" class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar (Right side) -->
+  <aside id="sidebar" class="bg-gray-700 text-white flex flex-col justify-between transition-all duration-300 w-72 h-full fixed top-0 right-0 z-40 transform translate-x-full pt-16">
+    <div>
+
+      <!-- Navigation -->
+      <nav class="space-y-1 px-2">
+        <a href="index.html" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-primary text-sm">
+          <i class="fas fa-home"></i>
+          <span class="sidebar-label">Нүүр хуудас</span>
+        </a>
+        <a href="Бүтээгдэхүүн.html" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-primary text-sm">
+          <i class="fas fa-box"></i>
+          <span class="sidebar-label">Бүтээгдэхүүн</span>
+        </a>
+        <a href="Хямдрал.html" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-primary text-sm">
+          <i class="fas fa-tags"></i>
+          <span class="sidebar-label">Хямдрал</span>
+        </a>
+        <a href="Холбоо барих.html" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-primary text-sm">
+          <i class="fas fa-envelope"></i>
+          <span class="sidebar-label">Холбоо барих</span>
+        </a>
+        <a href="Нэвтрэх.html" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-primary text-sm">
+          <i class="fas fa-sign-in-alt"></i>
+          <span class="sidebar-label">Нэвтрэх</span>
+        </a>
+        <a href="Сагсанд байгаа бүтээгдэхүүн.html" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-primary text-sm">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="sidebar-label">Сагс</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- User -->
+    <div class="px-4 pb-4 flex items-center gap-3">
+      <img src="image/gaya_sda.jpg" alt="User" class="w-10 h-10 rounded-full" />
+      <div class="sidebar-label">
+        <p class="text-sm font-medium">gaayaa sda</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main id="main-content" class="pt-20 px-4 transition-all duration-300">
+    <h1 class="text-2xl font-bold text-primary">Welcome to MyTech!</h1>
+    <p class="mt-4 text-gray-700">Таны систем ажиллаж байна.</p>
+  </main>
+
+  <!-- Script -->
+  <script>
+    const iconToggleBtn = document.getElementById('icon-toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    const pageHeader = document.getElementById('page-header');
+  
+    let sidebarOpen = false;
+  
+    function toggleSidebar() {
+      sidebarOpen = !sidebarOpen;
+      sidebar.classList.toggle('translate-x-full', !sidebarOpen);
+  
+      if (sidebarOpen) {
+        mainContent.classList.add('mr-72');
+        pageHeader.classList.add('mr-72');
+      } else {
+        mainContent.classList.remove('mr-72');
+        pageHeader.classList.remove('mr-72');
+      }
+    }
+  
+    iconToggleBtn.addEventListener('click', toggleSidebar);
+  </script>
+
+</body>
+</html>
