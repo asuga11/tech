@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Хэлтсийн удирдлага</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+<!-- Гол блок -->
+<div class="max-w-6xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4">Хэлтсүүдийн удирдлага</h1>
+
+    <!-- Хайлт -->
+    <div class="mb-4">
+        <input type="text" id="searchInput" placeholder="Хайх..."
+               class="border border-gray-300 rounded px-3 py-2 w-full"
+               oninput="searchDepartments()" />
+    </div>
+
+    <!-- Хэлтэс нэмэх форм -->
+    <form id="departmentForm" class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4" onsubmit="addDepartment(event)">
+        <input type="text" id="name" placeholder="Хэлтсийн нэр" class="border border-gray-300 rounded px-3 py-2" required />
+        <input type="text" id="manager" placeholder="Менежер" class="border border-gray-300 rounded px-3 py-2" />
+        <input type="text" id="location" placeholder="Байршил" class="border border-gray-300 rounded px-3 py-2" />
+        <input type="text" id="description" placeholder="Тайлбар" class="border border-gray-300 rounded px-3 py-2" />
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 col-span-full">
+            Нэмэх
+        </button>
+    </form>
+
+    <!-- Хэлтсүүдийн хүснэгт -->
+    <div class="overflow-x-auto">
+        <table class="w-full border border-gray-200 rounded overflow-hidden">
+            <thead>
+            <tr class="bg-gray-100 text-left">
+                <th class="py-2 px-4 border">#</th>
+                <th class="py-2 px-4 border">Нэр</th>
+                <th class="py-2 px-4 border">Менежер</th>
+                <th class="py-2 px-4 border">Байршил</th>
+                <th class="py-2 px-4 border">Тайлбар</th>
+                <th class="py-2 px-4 border text-center">Үйлдэл</th>
+            </tr>
+            </thead>
+            <tbody id="departmentList" class="bg-white"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ✨ Modal for edit -->
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">Хэлтэс засах</h2>
+        <form id="editForm" onsubmit="submitEdit(event)">
+            <input type="hidden" id="editId" />
+            <div class="mb-2">
+                <label class="block text-sm mb-1">Нэр</label>
+                <input type="text" id="editName" class="w-full border px-3 py-2 rounded" required />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm mb-1">Менежер</label>
+                <input type="text" id="editManager" class="w-full border px-3 py-2 rounded" />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm mb-1">Байршил</label>
+                <input type="text" id="editLocation" class="w-full border px-3 py-2 rounded" />
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm mb-1">Тайлбар</label>
+                <input type="text" id="editDescription" class="w-full border px-3 py-2 rounded" />
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeModal()"
+                        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Болих</button>
+                <button type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Хадгалах</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    async function fetchDepartments() {
+        const res = await fetch('/api/departments');
+        const data = await res.json();
+        window.departments = data;
+        renderDepartments(data);
+    }
+
+    function renderDepartments(departments) {
+        const tbody = document.getElementById('departmentList');
+        tbody.innerHTML = '';
+        departments.forEach((dept, index) => {
+            tbody.innerHTML += `
+          <tr>
+            <td class="py-2 px-4 border text-center">${index + 1}</td>
+            <td class="py-2 px-4 border">${dept.name}</td>
+            <td class="py-2 px-4 border">${dept.manager || ''}</td>
+            <td class="py-2 px-4 border">${dept.location || ''}</td>
+            <td class="py-2 px-4 border">${dept.description || ''}</td>
+            <td class="py-2 px-4 border text-center space-x-2">
+              <button onclick="openEditModal(${dept.id})" class="text-blue-500 hover:underline">Засах</button>
+              <button onclick="deleteDepartment(${dept.id})" class="text-red-500 hover:underline">Устгах</button>
+            </td>
+          </tr>
+        `;
+        });
+    }
+
+    async function addDepartment(event) {
+        event.preventDefault();
+        const department = {
+            name: document.getElementById('name').value,
+            manager: document.getElementById('manager').value,
+            location: document.getElementById('location').value,
+            description: document.getElementById('description').value
+        };
+        await fetch('/api/departments', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(department)
+        });
+        document.getElementById('departmentForm').reset();
+        fetchDepartments();
+    }
+
+    async function deleteDepartment(id) {
+        if (!confirm('Та энэ хэлтсийг устгахдаа итгэлтэй байна уу?')) return;
+        await fetch(`/api/departments/${id}`, { method: 'DELETE' });
+        fetchDepartments();
+    }
+
+    function openEditModal(id) {
+        const dept = window.departments.find(d => d.id === id);
+        document.getElementById('editId').value = dept.id;
+        document.getElementById('editName').value = dept.name;
+        document.getElementById('editManager').value = dept.manager || '';
+        document.getElementById('editLocation').value = dept.location || '';
+        document.getElementById('editDescription').value = dept.description || '';
+        document.getElementById('editModal').classList.remove('hidden');
+        document.getElementById('editModal').classList.add('flex');
+    }
+
+    function closeModal() {
+        document.getElementById('editModal').classList.remove('flex');
+        document.getElementById('editModal').classList.add('hidden');
+    }
+
+    async function submitEdit(event) {
+        event.preventDefault();
+        const id = document.getElementById('editId').value;
+        const updatedDept = {
+            name: document.getElementById('editName').value,
+            manager: document.getElementById('editManager').value,
+            location: document.getElementById('editLocation').value,
+            description: document.getElementById('editDescription').value
+        };
+        await fetch(`/api/departments/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedDept)
+        });
+        closeModal();
+        fetchDepartments();
+    }
+
+    function searchDepartments() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = window.departments.filter(d =>
+            d.name.toLowerCase().includes(query) ||
+            (d.manager && d.manager.toLowerCase().includes(query)) ||
+            (d.location && d.location.toLowerCase().includes(query)) ||
+            (d.description && d.description.toLowerCase().includes(query))
+        );
+        renderDepartments(filtered);
+    }
+
+    fetchDepartments();
+</script>
+</body>
+</html>

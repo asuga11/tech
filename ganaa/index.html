@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Haich Chuluu Daawuu</title>
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+    <body>
+        <p class="title">Rock-Paper-Scissors</p>
+
+        <button class="move-button js-haich-button">
+            <img src="images/haich-removebg-preview.png" alt="haich" width="100" height="100" class="move-icon">
+        </button>
+
+        <button class="move-button js-chuluu-button">
+            <img src="images/chuluu-removebg-preview.png" alt="chuluu" width="100" height="100" class="move-icon">
+        </button>
+
+        <button class="move-button js-daawuu-button">
+            <img src="images/daawuu-removebg-preview.png" alt="daawuu" width="100" height="100" class="move-icon">
+        </button>
+
+        <p class="result">Result:</p>
+        <p class="js-score score"></p>
+        <p class="js-moves">You and Computer</p>
+
+        <button 
+            onclick="
+                score.win = 0;
+                score.loss = 0;
+                score.tie = 0;
+                localStorage.removeItem('score');
+                updateScoreElement();
+            "
+            class="point-reset">Restart
+        </button>
+
+        <button 
+            onclick="autoplay();"
+            class="auto-start">Autoplay
+        </button>
+
+        <script src="scripts/app.js"></script>
+    </body>
+</html>

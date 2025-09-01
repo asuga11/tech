@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Дугуйн жагсаалт</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-black">
+
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-bold mb-6 text-white text-center">Bikes List</h1>
+
+  <div class="mb-4 text-center">
+    <input
+            type="text"
+            id="searchInput"
+            placeholder="Хайх (брэнд, загвар, төрөл)..."
+            class="p-2 w-1/2 border rounded"
+            oninput="filterBikes()"
+    />
+  </div>
+
+  <div class="bg-white p-6 rounded shadow-md mb-8">
+    <h2 class="text-xl font-semibold mb-4">Шинэ дугуй нэмэх</h2>
+    <form id="addBikeForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <input type="text" id="brand" placeholder="Брэнд" required class="border p-2 rounded" />
+      <input type="text" id="model" placeholder="Загвар" required class="border p-2 rounded" />
+      <input type="number" id="price" placeholder="Үнэ" required class="border p-2 rounded" />
+      <input type="text" id="type" placeholder="Төрөл" required class="border p-2 rounded" />
+      <select id="available" class="border p-2 rounded">
+        <option value="true">Бэлэн</option>
+        <option value="false">Бэлэн биш</option>
+      </select>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 col-span-full md:col-auto">Нэмэх</button>
+    </form>
+  </div>
+
+  <div id="loading" class="text-center text-blue-500 font-semibold mb-4">Ачааллаж байна...</div>
+  <table class="min-w-full bg-white rounded shadow-md overflow-hidden">
+    <thead class="bg-gray-200 text-gray-700">
+    <tr>
+      <th class="py-3 px-4 text-left">#</th>
+      <th class="py-3 px-4 text-left">Брэнд</th>
+      <th class="py-3 px-4 text-left">Загвар</th>
+      <th class="py-3 px-4 text-left">Үнэ</th>
+      <th class="py-3 px-4 text-left">Төрөл</th>
+      <th class="py-3 px-4 text-left">Бэлэн</th>
+      <th class="py-3 px-4 text-left">Үйлдэл</th>
+    </tr>
+    </thead>
+    <tbody id="bikesTableBody"></tbody>
+  </table>
+</div>
+
+<script>
+  let allBikes = [];
+
+  async function fetchBikes() {
+    try {
+      const response = await fetch('/api/bikes');
+      const bikes = await response.json();
+      allBikes = bikes;
+      renderTable(bikes);
+    } catch (error) {
+      document.getElementById('loading').textContent = 'Алдаа гарлаа!';
+    }
+  }
+
+  function renderTable(bikes) {
+    const tbody = document.getElementById('bikesTableBody');
+    const loading = document.getElementById('loading');
+    tbody.innerHTML = '';
+    loading.style.display = 'none';
+
+    if (bikes.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="text-center p-4">Дугуй олдсонгүй.</td></tr>';
+      return;
+    }
+
+    bikes.forEach((bike, index) => {
+      const row = document.createElement('tr');
+      row.className = 'border-b hover:bg-gray-100';
+      row.innerHTML = `
+        <td class="py-2 px-4">${index + 1}</td>
+        <td class="py-2 px-4">${bike.brand}</td>
+        <td class="py-2 px-4">${bike.model}</td>
+        <td class="py-2 px-4">${bike.price.toLocaleString()}₮</td>
+        <td class="py-2 px-4">${bike.type}</td>
+        <td class="py-2 px-4">${bike.available ? 'Тийм' : 'Үгүй'}</td>
+        <td class="py-2 px-4 space-x-2">
+          <button onclick='editBike(${JSON.stringify(bike)})' class="text-blue-600 hover:underline">Засах</button>
+          <button onclick='deleteBike(${bike.id})' class="text-red-600 hover:underline">Устгах</button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  document.getElementById('addBikeForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const newBike = {
+      brand: brand.value,
+      model: model.value,
+      price: parseFloat(price.value),
+      type: type.value,
+      available: available.value === 'true'
+    };
+
+    if (this.dataset.editingId) {
+      // Шинэчлэх
+      await fetch(`/api/bikes/${this.dataset.editingId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBike)
+      });
+      this.removeAttribute('data-editing-id');
+    } else {
+      // Нэмэх
+      await fetch('/api/bikes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBike)
+      });
+    }
+
+    this.reset();
+    document.querySelector('#addBikeForm button').textContent = "Нэмэх";
+    fetchBikes();
+  });
+
+  function editBike(bike) {
+    brand.value = bike.brand;
+    model.value = bike.model;
+    price.value = bike.price;
+    type.value = bike.type;
+    available.value = bike.available;
+    document.getElementById('addBikeForm').dataset.editingId = bike.id;
+    document.querySelector('#addBikeForm button').textContent = "Шинэчлэх";
+  }
+
+  async function deleteBike(id) {
+    if (confirm("Та энэ дугуйг устгах уу?")) {
+      await fetch(`/api/bikes/${id}`, { method: 'DELETE' });
+      fetchBikes();
+    }
+  }
+
+  function filterBikes() {
+    const keyword = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = allBikes.filter(bike =>
+            bike.brand.toLowerCase().includes(keyword) ||
+            bike.model.toLowerCase().includes(keyword) ||
+            bike.type.toLowerCase().includes(keyword)
+    );
+    renderTable(filtered);
+  }
+
+  fetchBikes();
+</script>
+
+</body>
+</html>
